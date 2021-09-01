@@ -1,0 +1,42 @@
+MariaDB [dwbi1]> create table Customer (
+    -> custNo char(11) not null,
+    -> custName varchar(100) not null,
+    -> address varchar(100) not null,
+    -> Internal varchar(2) not null,
+    -> Contact varchar(100) not null,
+    -> Phone varchar(14) not null,
+    -> City varchar(10) not null,
+    -> state varchar(10) not null,
+    -> zip varchar(10) not null,
+    -> CONSTRAINT CustomerPK PRIMARY KEY(custNo));
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    51
+Current database: dwbi1
+
+Query OK, 0 rows affected, 1 warning (0.037 sec)
+
+MariaDB [dwbi1]> create table Facility (
+    -> facno char(11) not null,
+    -> facname varchar(100) not null,
+    -> CONSTRAINT FacilityPK PRIMARY KEY(facno));
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+
+MariaDB [dwbi1]> create table Location (
+    -> locno char(20) not null,
+    -> facno char(20) not null,
+    -> locname varchar(100) not null,
+    -> CONSTRAINT LocationPK PRIMARY KEY(locno));
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+
+MariaDB [dwbi1]> alter table Location add CONSTRAINT LocationFK FOREIGN KEY (facno) REFERENCES Facility(facno) on DELETE CASCADE on UPDATE CASCADE;
+Query OK, 0 rows affected (0.080 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [dwbi1]> alter table Facility add UNIQUE (facno);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [dwbi1]> clear
+MariaDB [dwbi1]> cls
+    -> 
